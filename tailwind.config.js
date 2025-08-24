@@ -6,6 +6,20 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      center: true, // 항상 가운데 정렬
+      padding: {
+        DEFAULT: "1.25rem", // 기본 20px
+        md: "2.5rem", // 768px 이상일 때 40px
+        lg: "20px", // 1024px 이상일 때 다시 20px
+      },
+      screens: {
+        sm: "40rem", // 640px
+        md: "48rem", // 768px
+        lg: "64rem", // 1024px
+        xl: "80rem", // 1280px
+      },
+    },
     extend: {
       fontFamily: {
         pretendard: ["Pretendard", "sans-serif"],

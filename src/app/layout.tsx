@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Footer from "@/components/footer/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,7 +15,6 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
-        {/* Pretendard CDN 추가 */}
         <link
           rel="stylesheet"
           as="style"
@@ -22,7 +22,12 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css"
         />
       </head>
-      <body>{children}</body>
+      <body className="min-h-screen flex flex-col">
+        <div className="mx-auto md:container md:min-h-[calc(100dvh-358px-64px)]">
+          <main className="flex-1">{children}</main>
+        </div>
+        <Footer />
+      </body>
     </html>
   );
 }
