@@ -15,29 +15,12 @@ const FooterLogo = () => {
       />
       <div className="mt-6 flex flex-col gap-6 md:mt-9">
         <main>
-          <ul className="flex flex-wrap items-center text-body-3 text-label-700 [&_a:hover]:font-bold [&>li:not(:first-child)]:before:content-['·'] [&>li:not(:first-child)]:before:mx-2">
-            <li>
-              <a href="/">Home</a>
-            </li>
-            <li>
-              <a href="/">사용자 이용약관</a>
-            </li>
-            <li>
-              <a href="/">개인정보 처리방침</a>
-            </li>
-            <li>
-              <a href="/">공지사항</a>
-            </li>
-            <li>
-              <a href="/">FAQ</a>
-            </li>
-            <li>
-              <a href="/">블로그</a>
-            </li>
-            <li>
-              <a href="/">채용정보</a>
-            </li>
-          </ul>
+          <div className="flex flex-wrap items-center gap-2 text-body-3 text-label-700 [&_a:hover]:font-bold">
+            <a href="/">Home</a> ·<a href="/">사용자 이용약관</a> ·{" "}
+            <a href="/">개인정보 처리방침</a> · <a href="/">공지사항</a> ·{" "}
+            <a href="/">FAQ</a>· <a href="/">블로그</a> ·{" "}
+            <a href="/">채용정보</a>
+          </div>
         </main>
         <main>
           <div className="text-body-3 font-normal text-label-500 lg:text-body-2">
