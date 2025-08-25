@@ -1,8 +1,13 @@
 import { Button } from "@/shared/button/Button";
 import { Input } from "@/shared/input/Input";
-import { Search } from "lucide-react";
-import { CircleX } from "lucide-react";
-export default function Home() {
+import { Search, CircleX } from "lucide-react";
+import { getBlogBanners } from "@/apis/blog";
+import BannerCarousel from "@/components/blog/BannerCarousel";
+import DesktopBanners from "@/components/blog/DesktopBanners";
+
+export default async function Home() {
+  const banners = await getBlogBanners();
+
   return (
     <article className="max-md:container ">
       <header className="flex flex-col max-md:gap-8 md:flex-row md:items-center md:justify-between">
@@ -15,7 +20,6 @@ export default function Home() {
             className="rounded-md w-full h-[48px] md:w-[400px] lg:w-[468px] px-6 py-[12.5px] pl-11 border-line-200  "
             placeholder="검색어를 입력해주세요"
           />
-
           <Button
             variant="ghost"
             size="icon"
@@ -26,11 +30,8 @@ export default function Home() {
         </div>
       </header>
       <section className="mt-8 md:mt-10">
-        <div
-          className="relative md:hidden"
-          role="region"
-          aria-roledescription="carousel"
-        ></div>
+        <BannerCarousel banners={banners} />
+        <DesktopBanners banners={banners} />
       </section>
     </article>
   );
