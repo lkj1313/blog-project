@@ -6,7 +6,7 @@ const HeaderMobileActions = () => {
   return (
     <div className="flex items-center gap-4 lg:hidden">
       <Link
-        href="/"
+        href="/sign-up"
         className="inline-flex items-center justify-center whitespace-nowrap cursor-pointer disabled:cursor-not-allowed border border-secondary-300 bg-background-default text-primary hover:border-secondary-300 hover:bg-label-100 active:bg-background-alternative disabled:border-status-disable disabled:bg-background-default disabled:text-status-disable h-[32px] gap-1 rounded-sm px-6 text-body-3 font-medium"
       >
         로그인/회원가입

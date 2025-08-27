@@ -52,6 +52,7 @@ export default function CategoryTabs({ value, onChange }: CategoryTabsProps) {
       {categories.map((category) => (
         <div key={category.id} className="relative">
           <Button
+            variant="ghost"
             ref={(el) => registerButtonRef(category.id, el)}
             className={`text-body-1 whitespace-nowrap py-[15px] px-5 relative font-semibold ${
               value === category.id ? "text-label-900" : "text-label-500"

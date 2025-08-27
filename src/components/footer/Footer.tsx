@@ -1,9 +1,19 @@
+"use client";
+
 import React from "react";
+import { usePathname } from "next/navigation";
 import FooterLogo from "./FooterLogo";
 import FooterCompanyLogos from "./FooterCompanyLogos";
 import FooterCustomerService from "./FooterCustomerService";
 
 const Footer = () => {
+  const pathname = usePathname();
+
+  // 회원가입 페이지에서는 푸터 숨김
+  if (pathname.startsWith("/sign-up")) {
+    return null;
+  }
+
   return (
     <footer className="w-full bg-background-default h-[358px]">
       <div className="shrink-0 h-px w-full bg-line-200"></div>
