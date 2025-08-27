@@ -9,8 +9,8 @@ import FooterCustomerService from "./FooterCustomerService";
 const Footer = () => {
   const pathname = usePathname();
 
-  // 회원가입 페이지에서는 푸터 숨김
-  if (pathname.startsWith("/sign-up")) {
+  // 회원가입 페이지와 로그인 페이지에서는 푸터 숨김
+  if (pathname.startsWith("/sign-up") || pathname.startsWith("/login")) {
     return null;
   }
 
