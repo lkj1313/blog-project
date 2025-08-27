@@ -1,21 +1,21 @@
 "use client";
 
-import { BlogDetailResponse } from "@/types/blog";
+import { useBlogDetail } from "@/hooks/blog";
 import { formatDate } from "@/lib/utils";
-import { ArrowLeft, Calendar, Clock } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/shared/button/Button";
+import Link from "next/link";
+import Image from "next/image";
+import { RichHtml } from "@/shared/rich-html";
 
 interface BlogDetailContentProps {
-  blog: BlogDetailResponse;
+  blogId: number;
 }
 
-export default function BlogDetailContent({ blog }: BlogDetailContentProps) {
+export default function BlogDetailContent({ blogId }: BlogDetailContentProps) {
   const router = useRouter();
-
-  const handleGoBack = () => {
-    router.back();
-  };
+  const { data: blog } = useBlogDetail(blogId);
 
   const getCategoryLabel = (category: string) => {
     const categoryMap = {
@@ -28,60 +28,25 @@ export default function BlogDetailContent({ blog }: BlogDetailContentProps) {
   };
 
   return (
-    <div className="py-8 md:py-12">
-      {/* 뒤로가기 버튼 */}
-      <Button
-        variant="ghost"
-        onClick={handleGoBack}
-        className="mb-6 text-label-700 hover:text-label-800"
-      >
-        <ArrowLeft className="w-4 h-4 mr-2" />
-        목록으로 돌아가기
-      </Button>
-
-      {/* 블로그 헤더 */}
-      <header className="mb-8">
-        <div className="mb-4">
-          <span className="inline-block px-3 py-1 text-sm font-medium text-primary-600 bg-primary-50 rounded-full">
-            {getCategoryLabel(blog.category)}
-          </span>
-        </div>
-
-        <h1 className="text-title-2 md:text-title-1 font-bold text-label-800 mb-4">
-          {blog.title}
-        </h1>
-
-        <p className="text-body-2 text-label-600 mb-6">{blog.summary}</p>
-
-        <div className="flex items-center gap-6 text-sm text-label-500">
-          <div className="flex items-center gap-2">
-            <Calendar className="w-4 h-4" />
-            <span>작성일: {formatDate(blog.createdAt)}</span>
+    <div className="mx-auto ">
+      <div className="mx-auto max-w-(--breakpoint-md)">
+        <header>
+          <div className="flex items-center gap-1 text-title-4 text-label-700">
+            <span className="cursor-pointer">블로그</span>
+            <ChevronRight className="w-[20px] h-[20px]" />
+            <Link href={`/?category=${blog.category}`}>
+              {getCategoryLabel(blog.category)}
+            </Link>
           </div>
-          <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4" />
-            <span>수정일: {formatDate(blog.updatedAt)}</span>
-          </div>
-        </div>
-      </header>
+          <h2 className="mt-6 text-title-3 font-bold md:text-display-2 md:font-semibold">
+            {blog.title}
+          </h2>
+          <p className="mt-2 text-body-3 text-label-500 md:text-title-4">
+            {blog.updatedAt}
+          </p>
+        </header>
 
-      {/* 썸네일 이미지 */}
-      {blog.thumbnail && (
-        <div className="mb-8">
-          <img
-            src={blog.thumbnail}
-            alt={blog.title}
-            className="w-full h-auto rounded-lg object-cover"
-          />
-        </div>
-      )}
-
-      {/* 블로그 내용 */}
-      <div className="prose prose-lg max-w-none">
-        <div
-          className="text-body-1 text-label-700 leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: blog.content }}
-        />
+        <RichHtml html={blog.content} />
       </div>
     </div>
   );

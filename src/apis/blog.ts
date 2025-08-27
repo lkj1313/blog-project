@@ -37,7 +37,7 @@ export const getBlogList = async (params?: {
 
 export const getBlogDetail = async (id: number) => {
   const response = await fetcher.get({
-    url: ENDPOINT.BLOGS.DETAIL(id), // 함수 호출 결과 그대로
+    url: ENDPOINT.BLOGS.DETAIL(id),
   });
   const data = await response.json();
   return data as BlogDetailResponse;

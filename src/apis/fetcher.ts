@@ -76,6 +76,15 @@ const handleError = async (response: Response, requestProps: RequestProps) => {
   const errorMessage =
     (payload as any)?.errorMessage || (payload as any)?.message;
 
+  if (response.status === 404) {
+    throw new APIError(
+      404,
+      "NOT_FOUND",
+      "요청한 리소스를 찾을 수 없습니다.",
+      payload
+    );
+  }
+
   if (response.status === 401) {
     if (requestProps.url === ENDPOINT.AUTH.REFRESH) {
       throw new APIError(401, errorCode, errorMessage, payload);
