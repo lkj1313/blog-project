@@ -6,16 +6,14 @@ import type {
   BlogDetailResponse,
 } from "@/types/blog";
 
-/** 블로그 배너 조회 */
 export const getBlogBanners = async () => {
   const response = await fetcher.get({
-    url: ENDPOINT.BLOGS.BANNERS,
+    url: ENDPOINT.BLOGS.BANNERS, // 전체 URL 반환한다고 가정
   });
   const data = await response.json();
   return data as BlogBanner[];
 };
 
-/** 블로그 목록 조회 */
 export const getBlogList = async (params?: {
   page?: number;
   pageSize?: number;
@@ -37,10 +35,9 @@ export const getBlogList = async (params?: {
   return data as BlogListResponse;
 };
 
-/** 블로그 상세 조회 */
 export const getBlogDetail = async (id: number) => {
   const response = await fetcher.get({
-    url: ENDPOINT.BLOGS.DETAIL(id),
+    url: ENDPOINT.BLOGS.DETAIL(id), // 함수 호출 결과 그대로
   });
   const data = await response.json();
   return data as BlogDetailResponse;

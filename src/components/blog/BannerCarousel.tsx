@@ -1,35 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { BlogBanner } from "@/types/blog";
+import { useBannerCarousel } from "@/hooks/blog/useBannerCarousel";
 
 export default function BannerCarousel({ banners }: { banners: BlogBanner[] }) {
   if (!banners?.length) return null;
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
-
-  // 첫 로딩 감지
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsFirstLoad(false);
-    }, 100);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // 자동 슬라이드 (3초마다)
-  useEffect(() => {
-    if (banners.length <= 1) return;
-
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % banners.length);
-    }, 3000);
-
-    return () => clearInterval(timer);
-  }, [banners.length]);
+  const { currentIndex, isFirstLoad } = useBannerCarousel(banners);
 
   return (
     <div
@@ -38,7 +18,6 @@ export default function BannerCarousel({ banners }: { banners: BlogBanner[] }) {
       aria-roledescription="carousel"
     >
       <div className="overflow-hidden">
-        {/* 메인 배너 */}
         <div className="relative aspect-[2/1] w-full overflow-hidden rounded-2xl border border-line-200">
           <AnimatePresence>
             <motion.div

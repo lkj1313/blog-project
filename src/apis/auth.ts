@@ -5,9 +5,7 @@ import type {
   LoginResponse,
   MeResponse,
   RegisterArgs,
-  RegisterResponse,
   VerifyBusinessNumberArgs,
-  VerifyBusinessNumberResponse,
   RefreshTokenResponse,
 } from "@/types/auth";
 
