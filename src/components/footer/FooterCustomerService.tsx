@@ -9,7 +9,7 @@ const FooterCustomerService = () => {
         </h3>
         <a
           href="tel:1811-1463"
-          className="font-mukta  text-display-2 font-bold text-nowrap text-primary-500 md:text-[44px] lg:text-display-1"
+          className="font-mukta  text-display-2 font-bold text-nowrap text-primary md:text-[44px] lg:text-display-1"
         >
           1811-1463
         </a>

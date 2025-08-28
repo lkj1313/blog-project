@@ -1,5 +1,3 @@
-// src/types/blog.ts
-
 export type BlogBanner = {
   id: number;
   title: string;
