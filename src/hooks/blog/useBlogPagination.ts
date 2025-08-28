@@ -30,11 +30,19 @@ export function useBlogPagination() {
   // URL 쿼리 파라미터 업데이트 함수
   const updateURL = (newPage: number, newCategory: UiCategory) => {
     const params = new URLSearchParams();
-    params.set("page", newPage.toString());
+
+    // 페이지가 1이 아닐 때만 page 파라미터 추가
+    if (newPage > 1) {
+      params.set("page", newPage.toString());
+    }
+
     if (newCategory !== "all") {
       params.set("category", newCategory);
     }
-    router.push(`?${params.toString()}`);
+
+    const queryString = params.toString();
+    const url = queryString ? `?${queryString}` : "";
+    router.push(url);
   };
 
   const handleCategoryChange = (next: UiCategory) => {
