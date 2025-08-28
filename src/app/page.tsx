@@ -4,6 +4,7 @@ import { Search, CircleX } from "lucide-react";
 import { getBlogBanners } from "@/apis/blog";
 import BannerCarousel from "@/components/blog/BannerCarousel";
 import DesktopBanners from "@/components/blog/DesktopBanners";
+import CategoryTabs from "@/components/blog/CategoryTabs";
 
 export default async function Home() {
   const banners = await getBlogBanners();
@@ -32,6 +33,9 @@ export default async function Home() {
       <section className="mt-8 md:mt-10">
         <BannerCarousel banners={banners} />
         <DesktopBanners banners={banners} />
+      </section>
+      <section className="mt-8 md:mt-10 lg:mt-11">
+        <CategoryTabs />
       </section>
     </article>
   );
