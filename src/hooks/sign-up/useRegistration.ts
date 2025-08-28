@@ -37,7 +37,7 @@ export function useRegistration() {
         const response = await postRegister(registerData);
         console.log("회원가입 성공:", response);
 
-        // 성공 시 로그인 페이지로 리다이렉트
+        // 성공 시 alert 표시 후 로그인 페이지로 리다이렉트
         alert("회원가입이 완료되었습니다!");
         router.push("/login");
 

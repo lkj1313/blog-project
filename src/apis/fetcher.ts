@@ -1,6 +1,5 @@
 import APIError from "@/apis/error/APIError";
 import { ENDPOINT } from "@/apis/url";
-import { ROUTE_PATH } from "@/shared/constants/routes";
 import { deleteTokens, postReissueAccessToken } from "@/apis/auth";
 
 type Method = "GET" | "POST" | "PATCH" | "PUT" | "DELETE";
@@ -101,6 +100,11 @@ const handleUnauthorized = async (
   message?: string,
   raw?: unknown
 ) => {
+  // 로그인 관련 요청일 때는 리다이렉트하지 않음
+  const isLoginRequest =
+    originalReq.url.includes("/auth/login") ||
+    originalReq.url.includes("/auth/register");
+
   if (!refreshPromise) {
     refreshPromise = postReissueAccessToken();
   }
@@ -117,9 +121,12 @@ const handleUnauthorized = async (
   } catch {
     refreshPromise = null;
     await deleteTokens?.();
-    if (typeof window !== "undefined") {
-      window.location.href = ROUTE_PATH.root;
+
+    // 로그인 관련 요청이 아닐 때만 홈페이지로 리다이렉트
+    if (typeof window !== "undefined" && !isLoginRequest) {
+      window.location.href = "/";
     }
+
     throw new APIError(401, code, message, raw);
   }
 };
