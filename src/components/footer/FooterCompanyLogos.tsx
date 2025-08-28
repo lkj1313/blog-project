@@ -13,13 +13,55 @@ import {
 const FooterCompanyLogos = () => {
   return (
     <div className="grid grid-cols-3 flex-wrap items-center md:grid-cols-4 lg:flex mt-3 md:mt-7">
-      <Image src={KB금융그룹} alt="KB금융그룹" />
-      <Image src={KB국민카드} alt="KB국민카드" />
-      <Image src={키움캐피탈} alt="키움캐피탈" />
-      <Image src={금융위원회} alt="금융위원회" />
-      <Image src={아기유니콘} alt="아기유니콘" />
-      <Image src={벤처확인기업} alt="벤처확인기업" />
-      <Image src={기술보증} alt="기술보증" />
+      <Image
+        loading="lazy"
+        width={106}
+        height={48}
+        src={KB금융그룹}
+        alt="KB금융그룹"
+      />
+      <Image
+        loading="lazy"
+        width={106}
+        height={48}
+        src={KB국민카드}
+        alt="KB국민카드"
+      />
+      <Image
+        loading="lazy"
+        width={106}
+        height={48}
+        src={키움캐피탈}
+        alt="키움캐피탈"
+      />
+      <Image
+        loading="lazy"
+        width={106}
+        height={48}
+        src={금융위원회}
+        alt="금융위원회"
+      />
+      <Image
+        loading="lazy"
+        width={106}
+        height={48}
+        src={아기유니콘}
+        alt="아기유니콘"
+      />
+      <Image
+        loading="lazy"
+        width={106}
+        height={48}
+        src={벤처확인기업}
+        alt="벤처확인기업"
+      />
+      <Image
+        loading="lazy"
+        width={106}
+        height={48}
+        src={기술보증}
+        alt="기술보증"
+      />
     </div>
   );
 };
