@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 
 export function useLoginForm() {
   const router = useRouter();
+
   const [saveId, setSaveId] = useState(false);
   const [businessNumber, setBusinessNumber] = useState("");
   const [password, setPassword] = useState("");
@@ -82,17 +83,19 @@ export function useLoginForm() {
           localStorage.removeItem("savedBusinessNumber");
         }
 
-        // 홈페이지로 이동
+        alert("로그인 성공");
         router.push("/");
       } else {
         // API 에러 처리
-        setLoginError(
-          data.errorMessage || "로그인에 실패했습니다. 다시 시도해주세요."
-        );
+        console.log("Login failed, setting error message");
+        const errorMessage =
+          data.errorMessage || "로그인에 실패했습니다. 다시 시도해주세요.";
+        setLoginError(errorMessage);
       }
     } catch (error) {
       console.error("로그인 에러:", error);
-      setLoginError("로그인 중 오류가 발생했습니다. 다시 시도해주세요.");
+      const errorMessage = "로그인 중 오류가 발생했습니다. 다시 시도해주세요.";
+      setLoginError(errorMessage);
     } finally {
       setIsLoading(false);
     }
