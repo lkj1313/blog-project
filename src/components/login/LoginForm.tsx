@@ -1,9 +1,10 @@
 "use client";
 
-import { Check } from "lucide-react";
+import { Check, EyeIcon, EyeOffIcon } from "lucide-react";
 import { Input } from "@/shared/input/Input";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { Button } from "@/shared/button/Button";
+import { useState } from "react";
 
 interface LoginFormProps {
   businessNumber: string;
@@ -36,6 +37,12 @@ export function LoginForm({
   onSubmit,
   onSignUpClick,
 }: LoginFormProps) {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <form onSubmit={onSubmit}>
       <div className="flex flex-col gap-6">
@@ -93,12 +100,22 @@ export function LoginForm({
                 }`}
                 placeholder="비밀번호를 입력해 주세요"
                 id="_r_15_-form-item"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => onPasswordChange(e.target.value)}
                 onBlur={onPasswordBlur}
                 disabled={isLoading}
               />
+              <div
+                className="absolute top-1/2 right-7 -translate-y-1/2 cursor-pointer"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? (
+                  <EyeOffIcon className="w-6 h-6 text-gray-500" />
+                ) : (
+                  <EyeIcon className="w-6 h-6 text-gray-500" />
+                )}
+              </div>
             </div>
             {errors.password && (
               <p
