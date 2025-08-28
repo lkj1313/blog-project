@@ -14,8 +14,8 @@ export default function QueryProvider({
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 1000 * 60 * 5, // 5분 동안 fresh
-            gcTime: 1000 * 60 * 30, // 30분 후 캐시 가비지콜렉션
+            staleTime: 1000 * 60 * 5,
+            gcTime: 1000 * 60 * 30,
             refetchOnWindowFocus: false,
             retry: 1,
           },

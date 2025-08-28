@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useRef } from "react";
 import { Button } from "@/shared/button/Button";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCategoryTabs } from "@/hooks/blog/useCategoryTabs";
 
 const categories = [
   { id: "all", label: "전체" },
@@ -13,31 +13,20 @@ const categories = [
   { id: "case", label: "고객사례" },
 ];
 
-export default function CategoryTabs() {
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [activeButtonRect, setActiveButtonRect] = useState<DOMRect | null>(
-    null
-  );
-  const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
+type UiCategory = "all" | "trend" | "tips" | "guide" | "news" | "case";
 
-  const handleCategoryClick = (categoryId: string) => {
-    setActiveCategory(categoryId);
+interface CategoryTabsProps {
+  value: UiCategory;
+  onChange: (categoryId: UiCategory) => void;
+}
 
-    const buttonElement = buttonRefs.current[categoryId];
-    if (buttonElement) {
-      const rect = buttonElement.getBoundingClientRect();
-      const containerRect = buttonElement
-        .closest(".scrollbar-hide")
-        ?.getBoundingClientRect();
+export default function CategoryTabs({ value, onChange }: CategoryTabsProps) {
+  const { activeButtonRect, registerButtonRef, updateActiveButtonRect } =
+    useCategoryTabs();
 
-      if (containerRect) {
-        setActiveButtonRect({
-          ...rect,
-          left: rect.left - containerRect.left,
-          width: rect.width,
-        });
-      }
-    }
+  const handleCategoryClick = (categoryId: UiCategory) => {
+    onChange(categoryId);
+    updateActiveButtonRect(categoryId);
   };
 
   return (
@@ -63,15 +52,11 @@ export default function CategoryTabs() {
       {categories.map((category) => (
         <div key={category.id} className="relative">
           <Button
-            ref={(el) => {
-              buttonRefs.current[category.id] = el;
-            }}
+            ref={(el) => registerButtonRef(category.id, el)}
             className={`text-body-1 whitespace-nowrap py-[15px] px-5 relative font-semibold ${
-              activeCategory === category.id
-                ? "text-label-900"
-                : "text-label-500"
+              value === category.id ? "text-label-900" : "text-label-500"
             }`}
-            onClick={() => handleCategoryClick(category.id)}
+            onClick={() => handleCategoryClick(category.id as UiCategory)}
           >
             {category.label}
           </Button>
