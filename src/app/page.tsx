@@ -1,7 +1,12 @@
-export default function Home() {
+import { getBlogBanners } from "@/apis/blog";
+import BlogContent from "@/components/blog/BlogContent";
+
+export default async function Home() {
+  const banners = await getBlogBanners();
+
   return (
-    <div className="">
-      <div className="">Hello World</div>
-    </div>
+    <article className="max-md:container">
+      <BlogContent banners={banners} />
+    </article>
   );
 }
