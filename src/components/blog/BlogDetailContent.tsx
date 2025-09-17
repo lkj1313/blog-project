@@ -1,22 +1,14 @@
-"use client";
-
-import { useBlogDetail } from "@/hooks/blog";
-import { formatDate } from "@/lib/utils";
-import { ArrowLeft, Calendar, Clock, ChevronRight } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { Button } from "@/shared/button/Button";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
+
 import { RichHtml } from "@/shared/rich-html";
+import { BlogDetailResponse } from "@/types/blog";
 
 interface BlogDetailContentProps {
-  blogId: number;
+  blog: BlogDetailResponse;
 }
 
-export default function BlogDetailContent({ blogId }: BlogDetailContentProps) {
-  const router = useRouter();
-  const { data: blog } = useBlogDetail(blogId);
-
+export default function BlogDetailContent({ blog }: BlogDetailContentProps) {
   const getCategoryLabel = (category: string) => {
     const categoryMap = {
       NEWS: "뉴스",
