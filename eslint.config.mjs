@@ -24,6 +24,6 @@ const eslintConfig = [...compat.extends("next/core-web-vitals", "next/typescript
   rules: {
     "@next/next/no-html-link-for-pages": "off",
   },
-}, ...storybook.configs["flat/recommended"]];
+}, ...storybook.configs["flat/recommended"], ...storybook.configs["flat/recommended"]];
 
 export default eslintConfig;
